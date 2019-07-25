@@ -3,20 +3,20 @@ package app;
 import java.util.Scanner;
 import java.util.Stack;
 
-public class App {
+public class Decimal {
 
     final static int OCTAL = 8;
     final static int BINARY = 2;
 
-    public static void main(String[] args) {
+    public static void mainDecimal() {
 
-        System.out.println("========== CALCULADORA PROGRAMADOR =========\n");
+        System.out.println("\n\n========== DECIMAL ==> BINÁRIO, OCTAL OU HEXADECIMAL =========\n");
         
         int numero, base;
         Scanner scan = new Scanner(System.in);
 
         do {
-            System.out.println("\nDigite 0 para terminar o programa\n\nDigite um número: ");
+            System.out.println("\nDigite 0 para voltar ao menu.\nDigite -1 para terminar programa.\n\nDigite um número: ");
             numero = scan.nextInt();
 
             if (numero > 0) {
@@ -25,8 +25,12 @@ public class App {
 
                 while (base != OCTAL && base != BINARY) {
                     if (base == 0) {
-                        System.out.println("\nFim do programa.\n");
-                        System.exit(0);
+                        Main.main(null);
+                    } else {
+                        if (base == -1) {
+                            System.out.println("\nSaindo.\n");
+                            System.exit(0);
+                        }
                     }
                        
                     System.out.print("Digite 2 para binário ou 8 para octal: ");
@@ -34,20 +38,25 @@ public class App {
                 }
 
                 if (base == OCTAL){
-                    System.out.print("\nOctal ==>" + conversor(numero, base) + "\n______________________________________________________\n");
+                    System.out.print("\nOctal ==>" + converterBinarioOctal(numero, base) + "\n______________________________________________________\n");
                 } else {
-                    System.out.print("\nBinário ==>" + conversor(numero, base) + "\n______________________________________________________\n");
+                    System.out.print("\nBinário ==>" + converterBinarioOctal(numero, base) + "\n______________________________________________________\n");
                 }
             }
         } while (numero > 0);
-        
+
+        if (numero == -1) {
+            System.out.println("\nSaindo.\n");
+            System.exit(0);
+        }
+
+        Main.main(null);
         scan.close();
-        System.out.println("\nFim do programa.\n");
-                        
     }
 
 
-    public static String conversor (int numero, int base) {
+    // binário e octal
+    public static String converterBinarioOctal (int numero, int base) {
         Stack<Integer> pilha = new Stack<Integer>();
         int resto;
         String resultado = "";
