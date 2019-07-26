@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Main",
+            "request": "launch",
+            "mainClass": "app.Main",
+            "projectName": "Calculadora"
+        },
+        {
+            "type": "java",
             "name": "Debug (Launch) - External Terminal",
             "request": "launch",
             "console": "externalTerminal",
