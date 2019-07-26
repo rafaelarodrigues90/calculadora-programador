@@ -6,7 +6,7 @@ import java.util.Stack;
 public class Decimal {
 
     // pega número
-    public static void mainDecimal() {
+    public static void inputDecimal() {
     
         Scanner scan = new Scanner(System.in);
         int numero;
@@ -25,7 +25,7 @@ public class Decimal {
                 System.exit(0);
             } 
         } catch(Exception e) {
-            mainDecimal();
+            inputDecimal();
         }
 
         scan.close();
@@ -33,6 +33,7 @@ public class Decimal {
 
     final static int OCTAL = 8;
     final static int BINARY = 2;
+    final static int HEXADECIMAL = 16;
 
     // pega base
     public static void base(int numero) {
@@ -40,21 +41,37 @@ public class Decimal {
         Scanner scan = new Scanner(System.in);
         int base;
 
-        try{        
-            do{
-                System.out.print("Digite 2 para binário ou 8 para octal: ");
-                base = scan.nextInt();
+        try {
+            System.out.println("\nDigite uma opção:");
+            System.out.println(" 2 - decimal para binário\n 8 - decimal para octal\n16 - decimal para hexadecimal");
+            System.out.println(" 0 - Voltar ao menu principal\n-1 - Sair\n");
+            base = scan.nextInt();
 
-                if(base == 0) {
+            switch(base) {
+                case BINARY:
+                    System.out.print("\nBINÁRIO ==> " + toBinOctHex(numero, BINARY));
+                    inputDecimal();
+                    break;
+                case OCTAL:
+                    System.out.print("\nOCTAL ==> " + toBinOctHex(numero, OCTAL));    
+                    inputDecimal();
+                    break;
+                case HEXADECIMAL:
+                    System.out.print("\nHEXADECIMAL ==> " + toBinOctHex(numero, HEXADECIMAL));
+                    inputDecimal();
+                    break;
+                case 0:
                     Main.main(null);
-                } else if (base == -1) {
+                    break;
+                case -1:
                     System.out.println("\nSaindo.\n");
                     System.exit(0);
-                }
-                
-            } while(base != BINARY && base != OCTAL);
-        
-        } catch(Exception e) {
+                    break;
+                default:
+                    base(numero);
+                break;
+            }
+        } catch(Exception e) {;
             base(numero);
         }
         
@@ -63,12 +80,13 @@ public class Decimal {
 
 
     // converte para binário ou octal
-    public static String converterBinarioOctal (int numero, int base) {
+    public static String toBinOctHex(int numero, int base) {
+        
         Stack<Integer> pilha = new Stack<Integer>();
         int resto;
         String resultado = "";
+        String bases = "0123456789ABCDEF";
 
-        // converte para binário
         while(numero > 0) {
             resto = numero % base;
             pilha.add(resto);
@@ -81,9 +99,9 @@ public class Decimal {
             pilha.add(resto);
         }
 
-        // desempilha (inverte ordem)
-        while(!pilha.isEmpty()) {            
-            resultado += pilha.pop();
+        // desempilha (inverte ordem) e converte os restos para char bases
+        while(!pilha.isEmpty()) {
+            resultado += bases.charAt(pilha.pop());
         }
 
         return resultado;

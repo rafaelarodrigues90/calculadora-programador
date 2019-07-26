@@ -6,10 +6,9 @@
     "configurations": [
         {
             "type": "java",
-            "name": "CodeLens (Launch) - Main",
+            "name": "Debug (Launch) - Current File",
             "request": "launch",
-            "mainClass": "app.Main",
-            "projectName": "Calculadora"
+            "mainClass": "${file}"
         },
         {
             "type": "java",
@@ -18,5 +17,7 @@
             "console": "externalTerminal",
             "mainClass": ""
         }
+        
+
     ]
 }

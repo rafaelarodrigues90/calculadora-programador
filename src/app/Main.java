@@ -19,7 +19,7 @@ public class Main {
             
             switch (key) {
                 case 1:
-                    Decimal.mainDecimal();
+                    Decimal.inputDecimal();
                     break;
                 case 2:
                     break;
